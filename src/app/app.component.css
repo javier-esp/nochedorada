@@ -1,0 +1,168 @@
+/* body{
+    background: linear-gradient(60deg, rgb(247 200 108) 0%, rgb(171 122 40) 13%, rgb(102 71 26) 27%, rgb(36 21 13) 53%, rgb(37 28 23) 100%);
+    height: 100vh;
+} */
+
+body{
+    background: linear-gradient(60deg, rgb(171 122 40) 0%, rgb(36 21 13) 40%);
+    height: 100vh;
+}
+
+.contenedor{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    gap: 10rem;
+}
+.imagen_opacidad{
+    /* opacity: 0; */
+    animation: opacidad 2s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    animation-delay: 3s;
+    z-index: 10;
+    mask-image: radial-gradient(black 20%, transparent);;
+}
+
+.gloglo,.shadoune{
+    position: fixed;
+    /* background-color: rgb(255, 0, 0); */
+    /* height: 50%; 
+    width: 50%; */
+    /* z-index: 20; */
+}
+
+@keyframes opacidad {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+        opacity: 0;
+    }
+  }
+
+  @keyframes aparecer-izquierda {
+    0% {
+        left: -800px;
+    }
+
+    100%{
+        left: -150px;
+    }
+  }
+
+  @keyframes aparecer-derecha {
+    0% {
+        right: -800px;
+    }
+
+    100%{
+        right: -150px;
+    }
+  }
+
+
+.gloglo{
+    left: -800px;
+    /* opacity: 0; */
+    animation: aparecer-izquierda 3s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    animation-delay: 3s;
+    /* animation-direction: reverse;  */
+}
+.shadoune{
+    
+}
+.shadoune{
+    right: -800px;
+    animation: aparecer-derecha 3s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    animation-delay: 3s;
+}
+.shadoune img,.gloglo img {
+    mask-image: linear-gradient(black 80%, transparent);
+}
+
+.gloglo img {
+    mask-image: linear-gradient(black 80%, transparent);
+    /* mask-image: linear-gradient(to bottom,transparent 1%, black 100%) */
+}
+
+.enfrentamientos{
+    /* background-color: antiquewhite; */
+}
+
+.enfrentamientos._2{
+    transform: scaleX(-1);
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 0px;
+    grid-auto-rows: minmax(auto, 100px);
+    /* grid-auto-columns: minmax(auto, 200px); */
+    /* background-color: red; */
+}
+
+
+.celda{
+    /* max-width: 200px;
+    max-height: 200px; */
+    /* background-color: aqua; */
+    mask-image: url(/mascara2.png);
+    mask-size: cover;
+    /* width: 100%;
+    height: 100%; */
+    /* mask-mode: alpha; */
+    margin-left: -33px;
+    z-index: 30;
+}
+.celda:hover{
+    /* object-fit: cover; */
+    transform: scale(1.1);
+    z-index: 40;
+    background-color: rgb(171 122 40);
+    /* opacity: 0; */
+    transition-duration: 0.3s;
+}
+
+.celda:hover img{
+    /* object-fit: cover; */
+    opacity: 0.5;
+}
+
+.celda img {
+    /* object-fit: cover; */
+    width: 100%; 
+    height: 100%;
+}
+.segundafila{
+    margin-left: 20px;
+}
+
+.peleadores{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.grid .four.celda.alternar{
+    grid-column: 3;
+}
+
+.grid .five.celda.alternar{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.grid .five.celda.alternar2{
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.grid .six.celda.alternar2{
+    grid-column: 2;
+    grid-row: 1;
+}
