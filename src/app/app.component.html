@@ -1,35 +1,35 @@
 <body class="body">
   <router-outlet />
   <div class="contenedor">
-      <div class="gloglo">
-        <img src="gloglo.png" alt="" width="800">
+      <div *ngIf="mostrarizquierda" class="gloglo" [ngClass]="{ 'delay': quitardelayenunmomento }" >
+        <img [ngClass]="{ 'voltearesto': voltearPrimera }" src={{primerOponente}} alt="" width="800">
     </div>
     
     <img class="imagen_opacidad" src="zzz1500x500.jpg" alt="" width="1500" height="500">
     
-    <div class="shadoune">
-      <img src="shadoune.png" alt="" width="800">
+    <div *ngIf="mostrarderecha" class="shadoune" [ngClass]="{ 'delay': quitardelayenunmomento }" >
+      <img [ngClass]="{ 'voltearesto': voltearSegunda }" src={{segundoOponente}} alt="" width="800">
     </div>
     <div class="peleadores">
       <div class="enfrentamientos">
       <div class="grid">
-        <div class="one celda">
+        <div class="one celda" (click)="ejecutarAlgo('shadoune')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
           <img src="shadoune-cara.png" alt="">
         </div>
-        <div class="two celda">
+        <div class="two celda" (click)="ejecutarAlgo('gloglo')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
           <img src="gloglo-cara.png" alt="">
         </div>
-        <div class="three celda">
+        <div class="three celda" (click)="ejecutarAlgo('zully')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
           <img src="zully-cara.png" alt="">
         </div>
         
       </div>
       <div class="segundafila">
         <div class="grid">
-          <div class="four celda alternar">
+          <div class="four celda alternar" (click)="ejecutarAlgo('lapiinky')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
             <img src="lapiinky-cara.png" alt="">
           </div>  
-          <div class="five celda alternar">
+          <div class="five celda alternar" (click)="ejecutarAlgo('kingteka')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
             <img src="kingteka-cara.png" alt="">
           </div>
           <!-- <div class="six celda">
@@ -42,14 +42,14 @@
     <div class="enfrentamientos _2">
       <div class="grid">
         
-        <div class="six celda">
+        <div class="six celda" (click)="ejecutarAlgo('smash')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
           <img src="smash-cara.png" alt="">
         </div>
         
-        <div class="two celda">
+        <div class="two celda" (click)="ejecutarAlgo('dafonseka')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
           <img src="dafonseka-cara.png" alt="">
         </div>
-        <div class="three celda">
+        <div class="three celda" (click)="ejecutarAlgo('canita')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
           <img src="canita-cara.png" alt="">
         </div>
         
@@ -59,10 +59,10 @@
           <!-- <div class="four celda">
             <img src="cristorata-cara.png" alt="">
           </div>   -->
-          <div class="five celda alternar2">
+          <div class="five celda alternar2" (click)="ejecutarAlgo('cristorata')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
             <img src="cristorata-cara.png" alt="">
           </div>
-          <div class="six celda alternar2">
+          <div class="six celda alternar2" (click)="ejecutarAlgo('fanodrick')" [ngClass]="{ 'cursorp1': cursor,'cursorp2': !cursor }">
             <img src="fanodrick-cara.png" alt="">
           </div>
         </div>

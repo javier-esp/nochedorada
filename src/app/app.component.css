@@ -20,10 +20,44 @@ body{
 }
 .imagen_opacidad{
     /* opacity: 0; */
-    animation: opacidad 2s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
-    animation-delay: 3s;
+    animation: opacidad 1.5s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    animation-delay: 2s;
     z-index: 10;
     mask-image: radial-gradient(black 20%, transparent);;
+}
+
+
+@media (max-width: 1524px) {
+    .imagen_opacidad{
+        /* opacity: 0; */
+        width: 750px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 786px) {
+    .imagen_opacidad{
+        /* opacity: 0; */
+        width: 500px;
+        height: 166px;
+    }
+}
+
+@media (max-width: 730px) {
+    .imagen_opacidad{
+        /* opacity: 0; */
+        width: 375px;
+        height: 125px;
+    }
+}
+
+
+@media (max-width: 378px) {
+    .imagen_opacidad{
+        /* opacity: 0; */
+        width: 300px;
+        height: 100px;
+    }
 }
 
 .gloglo,.shadoune{
@@ -68,32 +102,61 @@ body{
 .gloglo{
     left: -800px;
     /* opacity: 0; */
-    animation: aparecer-izquierda 3s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
-    animation-delay: 3s;
+    animation: aparecer-izquierda 1s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    /* animation-delay: 3s; */
     /* animation-direction: reverse;  */
 }
+
 .shadoune{
     
 }
 .shadoune{
     right: -800px;
-    animation: aparecer-derecha 3s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
-    animation-delay: 3s;
+    animation: aparecer-derecha 1s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    /* animation-delay: 3s; */
+}
+.delay{
+    animation-delay: 2.5s;
 }
 .shadoune img,.gloglo img {
     mask-image: linear-gradient(black 80%, transparent);
 }
 
-.gloglo img {
-    mask-image: linear-gradient(black 80%, transparent);
-    /* mask-image: linear-gradient(to bottom,transparent 1%, black 100%) */
+@media (max-width: 1468px) {
+    .shadoune img,.gloglo img {
+        width: 700px;
+    }
 }
 
+@media (max-width: 1314px) {
+    .shadoune img,.gloglo img {
+        width: 600px;
+    }
+}
+@media (max-width: 1116px) {
+    .shadoune img,.gloglo img {
+        width: 500px;
+    }
+}
+@media (max-width: 906px) {
+    .shadoune img,.gloglo img {
+        width: 400px;
+    }
+}
+@media (max-width: 522px) {
+    .shadoune img,.gloglo img {
+        width: 300px;
+    }
+}
 .enfrentamientos{
     /* background-color: antiquewhite; */
 }
 
 .enfrentamientos._2{
+    transform: scaleX(-1);
+}
+
+.voltearesto{
     transform: scaleX(-1);
 }
 
@@ -106,6 +169,19 @@ body{
     /* background-color: red; */
 }
 
+@media (max-width: 742px) {
+    .grid{
+        grid-template-columns: repeat(3, 80px);
+    }
+}
+@media (max-width: 596px) {
+    /* .grid{
+        grid-template-columns: repeat(3, 80px);
+    } */
+    .grid{
+        grid-template-columns: repeat(3, 70px);
+    }
+}
 
 .celda{
     /* max-width: 200px;
@@ -118,6 +194,13 @@ body{
     /* mask-mode: alpha; */
     margin-left: -33px;
     z-index: 30;
+    
+}
+.cursorp1{
+    cursor: url('/cursorp1.png'), auto;
+}
+.cursorp2{
+    cursor: url('/cursorp2.png'), auto;
 }
 .celda:hover{
     /* object-fit: cover; */
@@ -141,12 +224,53 @@ body{
 .segundafila{
     margin-left: 20px;
 }
+@media (max-width: 536px) {
+    /* .grid{
+        grid-template-columns: repeat(3, 80px);
+    } */
+    .segundafila{
+        margin-left: 0px;
+    }
+}
+
 
 .peleadores{
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
+@media (max-width: 616px) {
+    /* .grid{
+        grid-template-columns: repeat(3, 80px);
+    } */
+    .peleadores{
+        gap: 5px;
+    }
+    
+}
+@media (max-width: 496px) {
+    .grid{
+        grid-template-columns: repeat(3, 80px);
+    }
+    .peleadores{
+        flex-direction: column;
+        gap: 0px;
+    }
+    .enfrentamientos._2{
+        transform: scaleX(1);
+    }
+    .segundafila{
+        margin-left: 20px;
+    }
+    .contenedor{
+        gap: 4rem;
+    }
+    .gloglo,.shadoune{
+        top: 0;
+    }
+}
+
+
 
 .grid .four.celda.alternar{
     grid-column: 3;
@@ -166,3 +290,9 @@ body{
     grid-column: 2;
     grid-row: 1;
 }
+
+.caja {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+  }
