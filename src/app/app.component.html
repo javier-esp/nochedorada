@@ -6,7 +6,12 @@
     </div>
     
     <img class="imagen_opacidad" src="zzz1500x500.jpg" alt="" width="1500" height="500">
-    
+    <a href={{linkhref}} target="_blank">
+      <div class="botondeversus versus" *ngIf="mostrarversus">
+        <span >VS.</span>
+      </div>
+    </a>
+
     <div *ngIf="mostrarderecha" class="shadoune" [ngClass]="{ 'delay': quitardelayenunmomento }" >
       <img [ngClass]="{ 'voltearesto': voltearSegunda }" src={{segundoOponente}} alt="" width="800">
     </div>
