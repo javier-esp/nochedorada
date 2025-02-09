@@ -12,11 +12,11 @@ body{
     display: flex;
     height: 100vh;
     width: 100vw;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     position: relative;
     flex-direction: column;
-    gap: 10rem;
+    /* gap: 5rem; */
 }
 .imagen_opacidad{
     /* opacity: 0; */
@@ -307,7 +307,7 @@ body{
         margin-left: 20px;
     }
     .contenedor{
-        gap: 4rem;
+        /* gap: 4rem; */
     }
     .gloglo,.shadoune{
         top: 0;
