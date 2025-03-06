@@ -67,6 +67,9 @@ body{
     width: 50%; */
     /* z-index: 20; */
 }
+.shadoune:hover{
+    cursor: pointer;
+}
 .botondeversus{
     z-index: 20;
     animation: testanimation 1s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
@@ -194,6 +197,9 @@ body{
 }
 .enfrentamientos{
     /* background-color: antiquewhite; */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .enfrentamientos._2{
@@ -216,6 +222,9 @@ body{
 @media (max-width: 742px) {
     .grid{
         grid-template-columns: repeat(3, 80px);
+    }
+    .enfrentamientos{
+        gap: 0px;
     }
 }
 @media (max-width: 596px) {

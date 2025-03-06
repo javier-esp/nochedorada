@@ -22,6 +22,7 @@ export class AppComponent {
   cursor = true
   mostrarversus = false
   mostrarversusTime:any
+  sonido = new Audio('participante.audio')
   linkhref = 'https://x.com/LaNocheDorada/status/1886602754325393871'
   ngOnInit(){
     setTimeout(() => this.quitardelayenunmomento = false, 3500);
@@ -29,8 +30,25 @@ export class AppComponent {
     this.mostrarversusTime = setTimeout(() => this.mostrarversus = true, 2800);
 
   }
+  peleadores = true
+  imagenDerechaClick(data:string){
+    console.log("shadoune click")
+
+    this.abrirEstadisticas('derecha')
+
+    console.log(data)
+  }
+
+  abrirEstadisticas(lado:string){
+    if(lado == 'derecha'){
+      this.peleadores = false
+      this.mostrarizquierda = false
+      this.mostrarversus = false
+    }
+  }
 
   ejecutarAlgo(nombre:string) {
+    this.sonido.pause()
     // console.log(nombre);
 
     const participante = this.listadeparticipantes.find(p => p.nombre === nombre);
@@ -60,6 +78,11 @@ export class AppComponent {
           this.segundoOponenteNombre = participante.nombre
           this.activarAnimacionderecha()
         }
+
+        // ejecutar sonido
+
+        this.sonido = new Audio(participante.audio)
+        this.sonido.play()
 
         if(this.primerOponenteNombre == participante.rival || this.segundoOponenteNombre == participante.rival){
           this.mostrarversus = true
@@ -92,23 +115,26 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/kingteka.png',
       viendoA: 'izquierda',
       rival: 'smash',
-      href: 'https://x.com/LaNocheDorada/status/1886598884790620591'
+      href: 'https://x.com/LaNocheDorada/status/1886598884790620591',
+      audio: 'audios/kingteka.wav'
     },
     {
       nombre : 'lapiinky',
       fotoCara : 'lapiinky-cara.png',
-      fotoMascara: 'lapiinky-cara.png',
+      fotoMascara: 'participantes/lapiinky.png',
       viendoA: 'izquierda',
       rival: 'zully',
-      href: 'https://x.com/LaNocheDorada/status/1886594461339128178'
+      href: 'https://x.com/LaNocheDorada/status/1886594461339128178',
+      audio: 'audios/lapinky.wav'
     },
     {
       nombre : 'zully',
       fotoCara : 'zully-cara.png',
-      fotoMascara: 'zully-cara.png',
+      fotoMascara: 'participantes/zully.png',
       viendoA: 'derecha',
       rival: 'lapiinky',
-      href: 'https://x.com/LaNocheDorada/status/1886594461339128178'
+      href: 'https://x.com/LaNocheDorada/status/1886594461339128178',
+      audio: 'audios/sully.wav'
     },
     {
       nombre : 'gloglo',
@@ -116,7 +142,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/gloglo.png',
       viendoA: 'derecha',
       rival: 'shadoune',
-      href: 'https://x.com/LaNocheDorada/status/1886590093189648410'
+      href: 'https://x.com/LaNocheDorada/status/1886590093189648410',
+      audio: 'audios/glogloking.wav'
     },
     {
       nombre : 'shadoune',
@@ -124,7 +151,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/shadoune.png',
       viendoA: 'izquierda',
       rival: 'gloglo',
-      href: 'https://x.com/LaNocheDorada/status/1886590093189648410'
+      href: 'https://x.com/LaNocheDorada/status/1886590093189648410',
+      audio: 'audios/shadune.wav'
     },
     {
       nombre : 'smash',
@@ -132,7 +160,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/smash.png',
       viendoA: 'derecha',
       rival: 'kingteka',
-      href: 'https://x.com/LaNocheDorada/status/1886598884790620591'
+      href: 'https://x.com/LaNocheDorada/status/1886598884790620591',
+      audio: 'audios/smash.wav'
     },
     {
       nombre : 'fanodrick',
@@ -140,7 +169,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/fanodric.png',
       viendoA: 'derecha',
       rival: 'dafonseka',
-      href: 'https://x.com/LaNocheDorada/status/1886602754325393871'
+      href: 'https://x.com/LaNocheDorada/status/1886602754325393871',
+      audio: 'audios/fanodrik.wav'
     },
     {
       nombre : 'cristorata',
@@ -148,7 +178,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/cristorata.png',
       viendoA: 'derecha',
       rival: 'canita',
-      href: 'https://x.com/LaNocheDorada/status/1886610577331458357'
+      href: 'https://x.com/LaNocheDorada/status/1886610577331458357',
+      audio: 'audios/cristorata.wav'
     },
     {
       nombre : 'canita',
@@ -156,7 +187,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/canita.png',
       viendoA: 'izquierda',
       rival: 'cristorata',
-      href: 'https://x.com/LaNocheDorada/status/1886610577331458357'
+      href: 'https://x.com/LaNocheDorada/status/1886610577331458357',
+      audio: 'audios/canita.wav'
     },
     {
       nombre : 'dafonseka',
@@ -164,7 +196,8 @@ activarAnimacionderecha() {
       fotoMascara: 'participantes/dafonseka.png',
       viendoA: 'izquierda',
       rival: 'fanodrick',
-      href: 'https://x.com/LaNocheDorada/status/1886602754325393871'
+      href: 'https://x.com/LaNocheDorada/status/1886602754325393871',
+      audio: 'audios/dafonseka.wav'
     },
   ]
 }
