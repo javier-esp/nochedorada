@@ -1,15 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PeleadoresService } from './peleadores.service';
+
+interface DataEstadisticas {
+  nombre: string;
+  peso: string;
+  categoriaDePeso: string;
+  estatura: string;
+  manoDominante: string;
+  entrenador: string;
+  puntoFuerte: string;
+  puntoDebil: string;
+  guanteTamano: string;
+}
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet,CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, CommonModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
+  constructor(private peleadoresService: PeleadoresService) {}
   title = 'noche-dorada';
   primerOponente = 'participantes/fanodric.png'
   primerOponenteNombre = 'fanodrick'
@@ -24,34 +37,171 @@ export class AppComponent {
   mostrarversusTime:any
   sonido = new Audio('participante.audio')
   linkhref = 'https://x.com/LaNocheDorada/status/1886602754325393871'
+  estadisticasDeDerecha = true
+  estadisticasAbiertas = false
+  dataEstadisticas : DataEstadisticas | undefined
   ngOnInit(){
     setTimeout(() => this.quitardelayenunmomento = false, 3500);
-    
+
     this.mostrarversusTime = setTimeout(() => this.mostrarversus = true, 2800);
+    setTimeout(() => {
+      let imagen = document.getElementById('imagen_opacidad');
+      if(imagen != null)
+        imagen.style.display = 'none'
+    }, 3500);
 
   }
   peleadores = true
   imagenDerechaClick(data:string){
-    console.log("shadoune click")
+    let listadeparticipantes = this.peleadoresService.getPeleadores();
+    const participante = listadeparticipantes.find(p => p.fotoMascara === data);
+    this.dataEstadisticas = participante?.metadata
+    if(!this.estadisticasAbiertas){
+      this.estadisticasAbiertas = true
+      console.log("shadoune click");
+      let imagen = document.getElementById('imagenamover');
+      if(imagen != null){
+        (imagen as any).style.viewTransitionName = 'imagen-seleccionada';
+        (document as any).startViewTransition(() => {
+          this.abrirEstadisticas('derecha')
+        });
+      }
+      
+      
 
-    this.abrirEstadisticas('derecha')
+      console.log(data)
+    }
+    
+  }
 
-    console.log(data)
+  imagenIzquierdaClick(data:string){
+    let listadeparticipantes = this.peleadoresService.getPeleadores();
+    const participante = listadeparticipantes.find(p => p.fotoMascara === data);
+    this.dataEstadisticas = participante?.metadata
+    if(!this.estadisticasAbiertas){
+      this.estadisticasAbiertas = true
+      let imagen = document.getElementById('iamgenDeIzquierda');
+      if(imagen != null){
+        (imagen as any).style.viewTransitionName = 'imagen-seleccionada';
+        (document as any).startViewTransition(() => {
+          this.abrirEstadisticas('izquierda')
+        });
+      }
+    }
+    
+  }
+
+  async imagenDetalle(){
+    console.log('imagenDetalleIzquierda');
+    let animacion = (document as any).startViewTransition(() => {
+      if(this.estadisticasDeDerecha){
+        this.cerrarEstadisticas('derecha')
+      }
+      else{
+        this.cerrarEstadisticas('izquierda')
+      }
+    });
+    await animacion.finished
+    let imagen = null
+    if(this.estadisticasDeDerecha){
+      imagen = document.getElementById('imagenamover');
+    }else{
+      imagen = document.getElementById('iamgenDeIzquierda');
+    }
+    if(imagen != null){
+      (imagen as any).style.viewTransitionName = 'none';
+    }
+    this.estadisticasAbiertas = false
+  }
+
+  cerrarEstadisticas(lado:string){
+    let imagenIzquierda = document.getElementById('iamgenDeIzquierda')
+    let objetivo = document.getElementById('mostrarDerecha')
+    let imagen = document.getElementById('imagenamover')
+    let logoversus = document.getElementById('logoversus')
+    let peleadores = document.getElementById('peleadores')
+    let botonRegresar = document.getElementById('botonRegresar')
+    let contenedor = document.getElementById('contenedor')
+    if(imagenIzquierda != null && imagen != null && logoversus != null && peleadores != null && botonRegresar != null && contenedor != null){
+      logoversus.style.display = 'block'
+      peleadores.style.display = 'flex'
+      contenedor.style.justifyContent = 'end'
+      botonRegresar.style.display = 'none'
+      if(lado == 'derecha'){
+        imagenIzquierda.style.display = 'block'
+        
+        
+        
+        objetivo?.append(imagen)
+      }
+      else if(lado == 'izquierda'){
+        let objetivo2 = document.getElementById('mostrarIzquierda')
+        imagen.style.display = 'block'
+        if(objetivo2 != null){
+          objetivo2.append(imagenIzquierda)
+        }
+        
+      }
+      
+    }
+      
   }
 
   abrirEstadisticas(lado:string){
+    let imagen = document.getElementById('imagenamover')
+      
+    let imagenIzquierda = document.getElementById('iamgenDeIzquierda')
+    let objetivo = document.getElementById('mostrarIzquierda')
+    let logoversus = document.getElementById('logoversus')
+    let peleadores = document.getElementById('peleadores')
+    let botonRegresar = document.getElementById('botonRegresar')
+    let contenedor = document.getElementById('contenedor')
+    if(lado == 'derecha' || lado == 'izquierda'){
+      if (imagen != null  && logoversus != null && peleadores != null && contenedor != null){
+        // objetivo?.removeChild(imagenIzquierda)
+        
+        logoversus.style.display = 'none'
+        peleadores.style.display = 'none'
+        contenedor.style.justifyContent = 'center'
+        // boton.innerText = 'hola'
+        // objetivo?.append(imagen,boton)
+      }
+    }
     if(lado == 'derecha'){
-      this.peleadores = false
-      this.mostrarizquierda = false
-      this.mostrarversus = false
+      
+      // let boton = document.createElement('button')
+      if (imagen != null && imagenIzquierda != null && botonRegresar != null ){
+        // objetivo?.removeChild(imagenIzquierda)
+        imagenIzquierda.style.display = 'none'
+        botonRegresar.style.display = 'block'
+        // boton.innerText = 'hola'
+        // objetivo?.append(imagen,boton)
+        objetivo?.append(imagen)
+        
+        console.log(objetivo?.childNodes[1])
+      }
+      this.estadisticasDeDerecha = true
+      // this.peleadores = false
+      // this.mostrarizquierda = false
+      // this.mostrarversus = false
+    }
+    else if(lado == 'izquierda'){
+      
+      let mostrarDerecha = document.getElementById('mostrarDerecha')
+      if(mostrarDerecha != null && imagenIzquierda != null && imagen != null && botonRegresar != null){
+        imagen.style.display = 'none'
+        botonRegresar.style.display = 'block'
+        mostrarDerecha.append(imagenIzquierda)
+      }
+      this.estadisticasDeDerecha = false
     }
   }
 
   ejecutarAlgo(nombre:string) {
     this.sonido.pause()
     // console.log(nombre);
-
-    const participante = this.listadeparticipantes.find(p => p.nombre === nombre);
+    let listadeparticipantes = this.peleadoresService.getPeleadores();
+    const participante = listadeparticipantes.find(p => p.nombre === nombre);
     
     if (participante) {
         // console.log("Foto:", participante.fotoCara);
@@ -108,96 +258,5 @@ activarAnimacionderecha() {
   this.mostrarderecha = false;
   setTimeout(() => this.mostrarderecha = true, 1);
 }
-  listadeparticipantes = [
-    {
-      nombre : 'kingteka',
-      fotoCara : 'kingteka-cara.png',
-      fotoMascara: 'participantes/kingteka.png',
-      viendoA: 'izquierda',
-      rival: 'smash',
-      href: 'https://x.com/LaNocheDorada/status/1886598884790620591',
-      audio: 'audios/kingteka.wav'
-    },
-    {
-      nombre : 'lapiinky',
-      fotoCara : 'lapiinky-cara.png',
-      fotoMascara: 'participantes/lapiinky.png',
-      viendoA: 'izquierda',
-      rival: 'zully',
-      href: 'https://x.com/LaNocheDorada/status/1886594461339128178',
-      audio: 'audios/lapinky.wav'
-    },
-    {
-      nombre : 'zully',
-      fotoCara : 'zully-cara.png',
-      fotoMascara: 'participantes/zully.png',
-      viendoA: 'derecha',
-      rival: 'lapiinky',
-      href: 'https://x.com/LaNocheDorada/status/1886594461339128178',
-      audio: 'audios/sully.wav'
-    },
-    {
-      nombre : 'gloglo',
-      fotoCara : 'gloglo-cara.png',
-      fotoMascara: 'participantes/gloglo.png',
-      viendoA: 'derecha',
-      rival: 'shadoune',
-      href: 'https://x.com/LaNocheDorada/status/1886590093189648410',
-      audio: 'audios/glogloking.wav'
-    },
-    {
-      nombre : 'shadoune',
-      fotoCara : 'shadoune-cara.png',
-      fotoMascara: 'participantes/shadoune.png',
-      viendoA: 'izquierda',
-      rival: 'gloglo',
-      href: 'https://x.com/LaNocheDorada/status/1886590093189648410',
-      audio: 'audios/shadune.wav'
-    },
-    {
-      nombre : 'smash',
-      fotoCara : 'smash-cara.png',
-      fotoMascara: 'participantes/smash.png',
-      viendoA: 'derecha',
-      rival: 'kingteka',
-      href: 'https://x.com/LaNocheDorada/status/1886598884790620591',
-      audio: 'audios/smash.wav'
-    },
-    {
-      nombre : 'fanodrick',
-      fotoCara : 'fanodrick-cara.png',
-      fotoMascara: 'participantes/fanodric.png',
-      viendoA: 'derecha',
-      rival: 'dafonseka',
-      href: 'https://x.com/LaNocheDorada/status/1886602754325393871',
-      audio: 'audios/fanodrik.wav'
-    },
-    {
-      nombre : 'cristorata',
-      fotoCara : 'cristorata-cara.png',
-      fotoMascara: 'participantes/cristorata.png',
-      viendoA: 'derecha',
-      rival: 'canita',
-      href: 'https://x.com/LaNocheDorada/status/1886610577331458357',
-      audio: 'audios/cristorata.wav'
-    },
-    {
-      nombre : 'canita',
-      fotoCara : 'canita-cara.png',
-      fotoMascara: 'participantes/canita.png',
-      viendoA: 'izquierda',
-      rival: 'cristorata',
-      href: 'https://x.com/LaNocheDorada/status/1886610577331458357',
-      audio: 'audios/canita.wav'
-    },
-    {
-      nombre : 'dafonseka',
-      fotoCara : 'dafonseka-cara.png',
-      fotoMascara: 'participantes/dafonseka.png',
-      viendoA: 'izquierda',
-      rival: 'fanodrick',
-      href: 'https://x.com/LaNocheDorada/status/1886602754325393871',
-      audio: 'audios/dafonseka.wav'
-    },
-  ]
+
 }
