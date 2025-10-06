@@ -1,9 +1,6 @@
 
 services:
   angular-noche-dorada:
-    image: angularnochedorada
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: nochedoradaimagen:latest
     ports:
       - 8080:80

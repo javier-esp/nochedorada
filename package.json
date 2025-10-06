@@ -10,6 +10,7 @@
     "test": "ng test",
     "dockercompose:prod" : "docker compose -f docker-compose.prod.yml up -d",
     "dockercompose:dev" : "docker compose -f docker-compose.dev.yml up -d",
+    "dockerbuild:prod" : "docker build -f Dockerfile -t nochedoradaimagen:latest .",
     "actualizar": "ng generate service peleadores"
   },
   "private": true,
