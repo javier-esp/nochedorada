@@ -1,0 +1,7 @@
+node_modules
+dist
+k8s
+docker_dev
+.vscode
+.gitignore
+README.md

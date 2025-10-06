@@ -53,10 +53,11 @@ export class AppComponent {
   }
   peleadores = true
   imagenDerechaClick(data:string){
-    let listadeparticipantes = this.peleadoresService.getPeleadores();
-    const participante = listadeparticipantes.find(p => p.fotoMascara === data);
-    this.dataEstadisticas = participante?.metadata
+    
     if(!this.estadisticasAbiertas){
+      let listadeparticipantes = this.peleadoresService.getPeleadores();
+      const participante = listadeparticipantes.find(p => p.fotoMascara === data);
+      this.dataEstadisticas = participante?.metadata
       this.estadisticasAbiertas = true
       console.log("shadoune click");
       let imagen = document.getElementById('imagenamover');
@@ -75,10 +76,11 @@ export class AppComponent {
   }
 
   imagenIzquierdaClick(data:string){
-    let listadeparticipantes = this.peleadoresService.getPeleadores();
-    const participante = listadeparticipantes.find(p => p.fotoMascara === data);
-    this.dataEstadisticas = participante?.metadata
+    console.log(this.estadisticasAbiertas)
     if(!this.estadisticasAbiertas){
+      let listadeparticipantes = this.peleadoresService.getPeleadores();
+      const participante = listadeparticipantes.find(p => p.fotoMascara === data);
+      this.dataEstadisticas = participante?.metadata
       this.estadisticasAbiertas = true
       let imagen = document.getElementById('iamgenDeIzquierda');
       if(imagen != null){
@@ -128,6 +130,12 @@ export class AppComponent {
       contenedor.style.justifyContent = 'end'
       botonRegresar.style.display = 'none'
       if(lado == 'derecha'){
+        if(!this.voltearSegunda){
+          imagen.style.transform = 'none'
+        }else{
+          imagen.style.transform = 'scaleX(-1)'
+        }
+        console.log('derecha')
         imagenIzquierda.style.display = 'block'
         
         
@@ -137,6 +145,11 @@ export class AppComponent {
       else if(lado == 'izquierda'){
         let objetivo2 = document.getElementById('mostrarIzquierda')
         imagen.style.display = 'block'
+        if(!this.voltearPrimera){
+          imagenIzquierda.style.transform = 'none'
+        }else{
+          imagenIzquierda.style.transform = 'scaleX(-1)'
+        }
         if(objetivo2 != null){
           objetivo2.append(imagenIzquierda)
         }
@@ -171,6 +184,11 @@ export class AppComponent {
       
       // let boton = document.createElement('button')
       if (imagen != null && imagenIzquierda != null && botonRegresar != null ){
+        if(this.voltearSegunda){
+          imagen.style.transform = 'none'
+        }else{
+          imagen.style.transform = 'scaleX(-1)'
+        }
         // objetivo?.removeChild(imagenIzquierda)
         imagenIzquierda.style.display = 'none'
         botonRegresar.style.display = 'block'
@@ -189,6 +207,11 @@ export class AppComponent {
       
       let mostrarDerecha = document.getElementById('mostrarDerecha')
       if(mostrarDerecha != null && imagenIzquierda != null && imagen != null && botonRegresar != null){
+        if(this.voltearPrimera){
+          imagenIzquierda.style.transform = 'none'
+        }else{
+          imagenIzquierda.style.transform = 'scaleX(-1)'
+        }
         imagen.style.display = 'none'
         botonRegresar.style.display = 'block'
         mostrarDerecha.append(imagenIzquierda)
