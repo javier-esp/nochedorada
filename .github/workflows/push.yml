@@ -1,7 +1,9 @@
 name: Build and Push Docker Image
 
 on:
-  workflow_dispatch: 
+  push:
+    branches:
+      - main
 # agregando el workflow para que se ejecute en cada push a la rama main
 jobs:
   build-and-push:
